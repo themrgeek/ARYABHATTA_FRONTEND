@@ -1,0 +1,248 @@
+/* ========================================
+   SplashScreen.css
+   Mobile-First · Light Theme
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  --color-accent:    #e8604a;
+  --color-bg:        #ffffff;
+  --color-title:     #1f1f1f;
+  --color-subtitle:  #5a5a5a;
+  --color-status:    #c07068;
+  --color-watermark: rgba(232, 96, 74, 0.10);
+
+  /* Mobile-first base sizes */
+  --logo-size:       120px;
+  --loader-dot:      10px;
+  --loader-gap:      9px;
+  --gap-logo-sub:    22px;
+  --gap-sub-loader:  40px;
+  --gap-loader-status: 14px;
+  --subtitle-size:   17px;
+  --status-size:     11px;
+  --status-spacing:  2.5px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Full-page white canvas ── */
+.splash-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100dvh; /* dynamic viewport height for mobile browsers */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── Watermark layer ── */
+.splash-watermarks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Top-center: faint graph grid */
+.wm-grid {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 190px;
+  background-image:
+    linear-gradient(var(--color-watermark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-watermark) 1px, transparent 1px);
+  background-size: 32px 32px;
+  border-radius: 4px;
+  opacity: 0.65;
+}
+
+/* Top-center AΣ watermark */
+.wm-logo-symbol {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 80px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: rgba(232, 96, 74, 0.11);
+  white-space: nowrap;
+}
+
+/* Top-right: f(x) */
+.wm-fx {
+  position: absolute;
+  top: 18%;
+  right: 4%;
+  font-size: 90px;
+  font-style: italic;
+  font-weight: 700;
+  color: rgba(232, 96, 74, 0.08);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+/* Bottom-left: compass */
+.wm-compass {
+  position: absolute;
+  bottom: 10%;
+  left: 4%;
+  font-size: 108px;
+  color: rgba(232, 96, 74, 0.08);
+  line-height: 1;
+}
+
+/* ── Center content — mobile-first ── */
+.splash-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+  padding: 0 24px;
+}
+
+/* Logo */
+.logo {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-bottom: var(--gap-logo-sub);
+}
+
+/* Italic subtitle */
+.splash-subtitle {
+  font-size: var(--subtitle-size);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-subtitle);
+  line-height: 1.45;
+  margin-bottom: var(--gap-sub-loader);
+}
+
+/* Dot loader */
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--loader-gap);
+  margin-bottom: var(--gap-loader-status);
+}
+
+.loader span {
+  width: var(--loader-dot);
+  height: var(--loader-dot);
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  animation: loader-pulse 1.4s ease-in-out infinite;
+}
+
+.loader span:nth-child(1) { animation-delay: 0s; }
+.loader span:nth-child(2) { animation-delay: 0.22s; }
+.loader span:nth-child(3) { animation-delay: 0.44s; }
+
+@keyframes loader-pulse {
+  0%, 100% { transform: scale(0.5);  opacity: 0.3; }
+  50%       { transform: scale(1);   opacity: 1;   }
+}
+
+/* Status / branding label */
+.splash-status {
+  font-size: var(--status-size);
+  font-weight: 500;
+  letter-spacing: var(--status-spacing);
+  text-transform: uppercase;
+  color: var(--color-status);
+}
+
+/* ═══════════════════════════════════════
+   Tablet  ≥ 768px
+   ═══════════════════════════════════════ */
+@media (min-width: 768px) {
+  :root {
+    --logo-size:         150px;
+    --loader-dot:        12px;
+    --loader-gap:        11px;
+    --gap-logo-sub:      28px;
+    --gap-sub-loader:    48px;
+    --gap-loader-status: 16px;
+    --subtitle-size:     19px;
+    --status-size:       12px;
+    --status-spacing:    3px;
+  }
+
+  .wm-grid    { width: 320px; height: 230px; }
+  .wm-logo-symbol { font-size: 108px; }
+  .wm-fx      { font-size: 120px; top: 16%; right: 5%; }
+  .wm-compass { font-size: 140px; bottom: 9%; left: 5%; }
+}
+
+/* ═══════════════════════════════════════
+   Desktop  ≥ 1024px
+   ═══════════════════════════════════════ */
+@media (min-width: 1024px) {
+  :root {
+    --logo-size:         180px;
+    --loader-dot:        14px;
+    --loader-gap:        13px;
+    --gap-logo-sub:      32px;
+    --gap-sub-loader:    56px;
+    --gap-loader-status: 18px;
+    --subtitle-size:     22px;
+    --status-size:       13px;
+    --status-spacing:    3.5px;
+  }
+
+  .splash-content { padding: 0 48px; }
+
+  .wm-grid    { width: 380px; height: 270px; background-size: 36px 36px; }
+  .wm-logo-symbol { font-size: 130px; top: 2%; }
+  .wm-fx      { font-size: 150px; right: 6%; top: 14%; }
+  .wm-compass { font-size: 170px; left: 6%; bottom: 8%; }
+}
+
+/* ═══════════════════════════════════════
+   Large desktop  ≥ 1440px
+   ═══════════════════════════════════════ */
+@media (min-width: 1440px) {
+  :root {
+    --logo-size:         210px;
+    --loader-dot:        16px;
+    --loader-gap:        15px;
+    --gap-logo-sub:      36px;
+    --gap-sub-loader:    64px;
+    --gap-loader-status: 20px;
+    --subtitle-size:     25px;
+    --status-size:       14px;
+    --status-spacing:    4px;
+  }
+
+  .wm-grid    { width: 440px; height: 310px; background-size: 40px 40px; }
+  .wm-logo-symbol { font-size: 160px; }
+  .wm-fx      { font-size: 180px; }
+  .wm-compass { font-size: 200px; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .loader span {
+    animation: none;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
